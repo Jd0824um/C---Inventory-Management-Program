@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Inventory_Management
+namespace Inventory_Management_Program
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Inventory_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formMain());
+            Application.Run(new Form1());
         }
     }
 }
