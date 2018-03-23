@@ -12,10 +12,13 @@ namespace Inventory_Management
 {
     public partial class formMain : Form
     {
+        ImageList imageList = new ImageList();
+
         public formMain()
         {
             InitializeComponent();
-
+            imageList.ImageSize = new Size(50, 50);
+            listViewInventory.SmallImageList = imageList;
             listViewInventory.Columns.Add("Picture", 70);
             listViewInventory.Columns.Add("Type", 60);
             listViewInventory.Columns.Add("Name", 100);
@@ -34,38 +37,69 @@ namespace Inventory_Management
             }
         }
 
+        private int item_Count() 
+            //Counts the number of items within the list view
+        {
+            int index = 0;
+            foreach (ListViewItem item in listViewInventory.Items)
+            {
+                index += 1;
+            }
+            return index;
+        }
+
+        private void add_Item()
+        {
+            using (var addForm = new formAddProduct())
+            {
+                var result = addForm.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    if (addForm.returnPicture == null) //Loads default image if it was left empty
+                    {
+                        var defaultImage = new Bitmap(Inventory_Management.Properties.Resources.Unknown);
+                        imageList.Images.Add(addForm.returnName, defaultImage);
+
+                    }
+                    else //Adds selected image with its name as the key
+                    {
+                        imageList.Images.Add(addForm.returnName, Image.FromFile(addForm.returnPicture));
+                    }
+                    string[] newItem = new string[6];
+                    newItem[1] = addForm.returnType;
+                    newItem[2] = addForm.returnName;
+                    newItem[3] = addForm.returnPrice;
+                    newItem[4] = addForm.returnQuanitity;
+                    newItem[5] = addForm.returnDistributor;
+
+                    listViewInventory.Items.Add(new ListViewItem(newItem, item_Count()));
+                    addForm.clearFutureValues();
+                }
+            }
+        }
+
+
+        private void delete_Item()
+        {
+            DialogResult proceed = MessageBox.Show("Are you sure you want to delete this item?", "Delete Item?", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if(proceed == DialogResult.Yes)
+            {
+                var index = listViewInventory.FocusedItem.Index;
+                listViewInventory.Items.RemoveAt(index);
+            }
+            
+        }
         private void btnGo_Click(object sender, EventArgs e)
         {
+           
             switch (comboChoice.SelectedItem.ToString())
             {
                 case "Add Product": //Brings up the add product form
-
-                    using (var addForm = new formAddProduct())
-                    {
-                        var result = addForm.ShowDialog();
-                        if(result == DialogResult.OK)
-                        {
-                            ImageList imagelist = new ImageList();
-                            imagelist.ImageSize = new Size(50, 50);
-
-                            if(addForm.returnPicture != null)
-                            {
-                                imagelist.Images.Add(Image.FromFile(addForm.returnPicture));
-                                listViewInventory.SmallImageList = imagelist;
-                            }                            
-                            string[] newItem = new string[6];
-                            newItem[1] = addForm.returnType;
-                            newItem[2] = addForm.returnName;
-                            newItem[3] = addForm.returnPrice;
-                            newItem[4] = addForm.returnQuanitity;
-                            newItem[5] = addForm.returnDistributor;
-
-                            listViewInventory.Items.Add(new ListViewItem(newItem, 0));
-                            addForm.clearFutureValues();
-                        }
-                    }
+                    add_Item();
                     break;
                 case "Delete Product":
+                    delete_Item();
                     break;
                 case "Update Product":
                     break;
@@ -78,6 +112,5 @@ namespace Inventory_Management
         {
             this.Close();
         }
-
     }
 }

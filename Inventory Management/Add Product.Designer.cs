@@ -151,6 +151,7 @@
             // 
             // pictureBoxAddProduct
             // 
+            this.pictureBoxAddProduct.ImageLocation = "";
             this.pictureBoxAddProduct.Location = new System.Drawing.Point(237, 4);
             this.pictureBoxAddProduct.Name = "pictureBoxAddProduct";
             this.pictureBoxAddProduct.Size = new System.Drawing.Size(112, 79);

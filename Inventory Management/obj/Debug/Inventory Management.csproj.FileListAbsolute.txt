@@ -9,3 +9,4 @@ C:\Users\John\source\repos\Inventory Management\obj\Debug\Inventory Management.c
 C:\Users\John\source\repos\Inventory Management\obj\Debug\Inventory Management.csproj.CoreCompileInputs.cache
 C:\Users\John\source\repos\Inventory Management\obj\Debug\Inventory Management.exe
 C:\Users\John\source\repos\Inventory Management\obj\Debug\Inventory Management.pdb
+C:\Users\John\source\repos\Inventory Management\obj\Debug\Inventory_Management.Resources.Delete_Product.resources

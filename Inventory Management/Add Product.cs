@@ -86,7 +86,7 @@ namespace Inventory_Management
         {
             if(combobox.SelectedItem == null)
             {
-                MessageBox.Show(name + " must be selected ");
+                MessageBox.Show(name + " must be selected ", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 combobox.Focus();
                 return false;
             }
@@ -97,7 +97,7 @@ namespace Inventory_Management
         {
             if(txtbox.Text == " ")
             {
-                MessageBox.Show(name + " is a required field. Please enter in a " + name);
+                MessageBox.Show(name + " is a required field. Please enter in a " + name, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtbox.Focus();
                 return false;
             }
@@ -113,7 +113,7 @@ namespace Inventory_Management
             {
                 return true;
             }
-            MessageBox.Show(name + " must be an decimal");
+            MessageBox.Show(name + " must be an decimal", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             txtbox.Focus();
             return false;
         }
@@ -121,12 +121,16 @@ namespace Inventory_Management
         private void btnExit_Click(object sender, EventArgs e)
             //Closes add product form
         {
-            this.Close();
+            DialogResult proceed = MessageBox.Show("Return to main screen?", "Exit",
+                   MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (proceed == DialogResult.Yes)
+                this.Close();
         }
 
         private void btnImage_Click(object sender, EventArgs e)
             //Adds a image to the picture box when the image button is clicked
         {
+            this.returnPicture = null;
             OpenFileDialog openFileDialogPicture = new OpenFileDialog();
 
             openFileDialogPicture.InitialDirectory = "c:\\";//Opens in starting directory

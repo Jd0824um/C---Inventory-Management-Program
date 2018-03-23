@@ -37,6 +37,7 @@
             // 
             // listViewInventory
             // 
+            this.listViewInventory.FullRowSelect = true;
             this.listViewInventory.Location = new System.Drawing.Point(12, 13);
             this.listViewInventory.Name = "listViewInventory";
             this.listViewInventory.Size = new System.Drawing.Size(403, 149);
@@ -65,6 +66,7 @@
             // 
             // btnExit
             // 
+            this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Location = new System.Drawing.Point(159, 233);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
