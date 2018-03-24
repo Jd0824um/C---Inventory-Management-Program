@@ -38,6 +38,7 @@
             // listViewInventory
             // 
             this.listViewInventory.FullRowSelect = true;
+            this.listViewInventory.HideSelection = false;
             this.listViewInventory.Location = new System.Drawing.Point(12, 13);
             this.listViewInventory.Name = "listViewInventory";
             this.listViewInventory.Size = new System.Drawing.Size(403, 149);
@@ -104,12 +105,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listViewInventory;
         private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.ComboBox comboChoice;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblChoice;
+        private System.Windows.Forms.ListView listViewInventory;
     }
 }
 

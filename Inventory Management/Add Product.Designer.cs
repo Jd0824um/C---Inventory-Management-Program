@@ -42,7 +42,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.pictureBoxAddProduct = new System.Windows.Forms.PictureBox();
             this.openFileDialogPicture = new System.Windows.Forms.OpenFileDialog();
-            this.btnImage = new System.Windows.Forms.Button();
+            this.btnAddImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAddProduct)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,15 +162,15 @@
             // 
             this.openFileDialogPicture.FileName = "openFileDialogPicture";
             // 
-            // btnImage
+            // btnAddImage
             // 
-            this.btnImage.Location = new System.Drawing.Point(253, 90);
-            this.btnImage.Name = "btnImage";
-            this.btnImage.Size = new System.Drawing.Size(75, 23);
-            this.btnImage.TabIndex = 14;
-            this.btnImage.Text = "Add Image";
-            this.btnImage.UseVisualStyleBackColor = true;
-            this.btnImage.Click += new System.EventHandler(this.btnImage_Click);
+            this.btnAddImage.Location = new System.Drawing.Point(237, 91);
+            this.btnAddImage.Name = "btnAddImage";
+            this.btnAddImage.Size = new System.Drawing.Size(112, 23);
+            this.btnAddImage.TabIndex = 14;
+            this.btnAddImage.Text = "Add Image";
+            this.btnAddImage.UseVisualStyleBackColor = true;
+            this.btnAddImage.Click += new System.EventHandler(this.btnImage_Click);
             // 
             // formAddProduct
             // 
@@ -180,7 +180,7 @@
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(361, 154);
             this.ControlBox = false;
-            this.Controls.Add(this.btnImage);
+            this.Controls.Add(this.btnAddImage);
             this.Controls.Add(this.pictureBoxAddProduct);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAdd);
@@ -221,6 +221,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.PictureBox pictureBoxAddProduct;
         private System.Windows.Forms.OpenFileDialog openFileDialogPicture;
-        private System.Windows.Forms.Button btnImage;
+        private System.Windows.Forms.Button btnAddImage;
     }
 }

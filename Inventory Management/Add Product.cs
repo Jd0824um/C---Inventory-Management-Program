@@ -95,7 +95,7 @@ namespace Inventory_Management
         private bool isPresent(TextBox txtbox, String name)
             //Validates textbox for empty string
         {
-            if(txtbox.Text == " ")
+            if(txtbox.Text.Trim() == "")
             {
                 MessageBox.Show(name + " is a required field. Please enter in a " + name, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtbox.Focus();

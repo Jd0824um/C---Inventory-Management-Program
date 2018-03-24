@@ -17,17 +17,17 @@ namespace Inventory_Management
         public formMain()
         {
             InitializeComponent();
-            imageList.ImageSize = new Size(50, 50);
-            listViewInventory.SmallImageList = imageList;
-            listViewInventory.Columns.Add("Picture", 70);
+            imageList.ImageSize = new Size(50, 50); //Sets the size of the list
+            listViewInventory.SmallImageList = imageList; //Adds the list to the list view
+            listViewInventory.Columns.Add("Picture", 70); //Adds columns
             listViewInventory.Columns.Add("Type", 60);
             listViewInventory.Columns.Add("Name", 100);
             listViewInventory.Columns.Add("Price", 50);
             listViewInventory.Columns.Add("Quanity", 50);
             listViewInventory.Columns.Add("Distributor", 100);
             listViewInventory.View = View.Details;
-            listViewInventory.GridLines = true;
-            listViewInventory.FullRowSelect = true;
+            listViewInventory.GridLines = true; //Adds gridlines to the view
+            listViewInventory.FullRowSelect = true; //Allows the full row to be selected
 
             string[] comboBoxChoices = { "Add Product", "Delete Product", "Update Product" };
 
@@ -38,7 +38,7 @@ namespace Inventory_Management
         }
 
         private int item_Count() 
-            //Counts the number of items within the list view
+        //Counts the number of items within the list view
         {
             int index = 0;
             foreach (ListViewItem item in listViewInventory.Items)
@@ -47,8 +47,20 @@ namespace Inventory_Management
             }
             return index;
         }
+        private void update_Item()
+        {
+            using (var updateForm = new Update_Product())
+            {
+                var item = listViewInventory.FocusedItem.SubItems;
+                updateForm.returnName = item[0].ToString();
 
+
+                var result = updateForm.ShowDialog();
+
+            }
+        }
         private void add_Item()
+        //Adds a item to the list view. Uses a second form to gather information
         {
             using (var addForm = new formAddProduct())
             {
@@ -73,44 +85,61 @@ namespace Inventory_Management
                     newItem[5] = addForm.returnDistributor;
 
                     listViewInventory.Items.Add(new ListViewItem(newItem, item_Count()));
+                    MessageBox.Show("Item was added!", "Message");
                     addForm.clearFutureValues();
                 }
             }
         }
-
-
         private void delete_Item()
+         //Deletes a item from user selection
         {
             DialogResult proceed = MessageBox.Show("Are you sure you want to delete this item?", "Delete Item?", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if(proceed == DialogResult.Yes)
             {
-                var index = listViewInventory.FocusedItem.Index;
-                listViewInventory.Items.RemoveAt(index);
+                var index = listViewInventory.FocusedItem.Index; //Gets index of selected item
+                listViewInventory.Items.RemoveAt(index); //Deletes item
             }
+            MessageBox.Show("Item was deleted", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             
         }
-        private void btnGo_Click(object sender, EventArgs e)
+        private void update_item()
         {
-           
+            DialogResult proceed = MessageBox.Show("Are you sure you want to delete this item?", "Delete Item?",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (proceed == DialogResult.Yes)
+            {
+                var index = listViewInventory.FocusedItem.Index; //Gets index of selected item
+                listViewInventory.Items.RemoveAt(index); //Deletes item
+            }
+            MessageBox.Show("Item was updated", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        private void btnGo_Click(object sender, EventArgs e)
+        //Gets the user choice and calls the appropriate function
+        {
             switch (comboChoice.SelectedItem.ToString())
             {
                 case "Add Product": //Brings up the add product form
                     add_Item();
                     break;
-                case "Delete Product":
+                case "Delete Product": //Brings up the function to delete a product
                     delete_Item();
                     break;
-                case "Update Product":
+                case "Update Product": //Brings up the update product form
+                    update_item();
                     break;
                 default:
+                    MessageBox.Show("Please select a option...", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }
         private void btnExit_Click(object sender, EventArgs e)
-            //Closes program
+         //Closes program
         {
-            this.Close();
+            DialogResult proceed = MessageBox.Show("Quit?", "Exit program",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (proceed == DialogResult.Yes)
+                this.Close();
         }
     }
 }
